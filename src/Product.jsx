@@ -1,15 +1,19 @@
 // src/Product.jsx
 
-const Product = (props) => {
+const Product = ({img, productName, price, description, hasDiscount}) => {
     return (
     <div>
         <img 
         width={300}
-        src={props.img}
+        src={img}
         alt="" />
-    <h2>{props.title}</h2>
-    <h3>Price: ${props.price}</h3>
-    <p>{props.description}</p>
+    <h3>{productName} 
+    {hasDiscount ? <span>🎁 BIG SALE</span> : null}
+    {/* 2 variant-> {hasDiscount && <span>🎁 BIG SALE</span>}
+    якщо тут true то буде показуватись те, що після &&, якщо false то ні*/}
+    </h3>
+    <h4>Price: ${price}</h4>
+    <p>{description}</p>
 
     <button type="button">Add to cart</button>
     <button type="button">😍</button>
