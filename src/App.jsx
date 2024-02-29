@@ -1,35 +1,33 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+// src/App.jsx
 
+import Product from './Product';
+
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Best selling</h1>
+
+      <Product
+      title="Taco Vita" 
+      img="https://images.pexels.com/photos/15486370/pexels-photo-15486370/free-photo-of-mexican-tacos-ona-serving-dish.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      price={10.99}
+      description="Tacom cu vita si legume proaspete"
+      />
+      <Product 
+      title="Taco Pork" 
+      img="https://images.pexels.com/photos/2338015/pexels-photo-2338015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      price={8.99}
+      description="Tacom cu pork si legume proaspete"/>
+      <Product
+      title="Taco Pui" 
+      img="https://images.pexels.com/photos/6605212/pexels-photo-6605212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      price={9.99}
+      description="Tacom cu pui si legume prajita si castraveti marinati"/>
+    </div>
   );
 }
 
-export default App;
+
+// export default App;
