@@ -1,6 +1,9 @@
 import ProductCard from './Components/ProductCard/ProductCard';
 
+import MailBox from './Components/MailBox/MailBox';
+
 import "./App.css";
+import { useState } from 'react';
 
 const productData = [
   {
@@ -33,6 +36,19 @@ const productData = [
 ];
 
 function App() {
+  const [counter, setCounter] = useState(0);
+  // let counter = 0; 
+
+  const onLogEmail = () => {
+    console.log("Email was sent");
+    setCounter(counter + 1);
+    // counter = counter +1; 
+  }
+
+  const handleDelete = (mailId) => {
+    console.log("mailId: ", mailId);
+    }
+
   return (
     <div>
       {productData.map((item => {
@@ -75,8 +91,9 @@ const isPromotional = item.quantity <= 2;
       hasDiscount={true}
       description="Tacom cu pui si legume prajita si castraveti marinati"/>
     */} 
+<h2 style={{color: "red"}}>Emails Counter: {counter} </h2>
+<MailBox emailCounter={counter} onLogEmail={onLogEmail} onDeleteEmail={handleDelete}/>
 
-      
     </div>
   );
 }
