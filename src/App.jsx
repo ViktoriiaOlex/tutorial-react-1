@@ -35,19 +35,42 @@ const productData = [
   }
 ];
 
+const emailsData = [
+  {id: "1", email: "foo@bar.com"},
+  {id: "2", email: "falexa65@bar.com"},
+  {id: "3", email: "rs1963@bar.com"},
+];
+
 function App() {
   const [counter, setCounter] = useState(0);
   // let counter = 0; 
+  const [emails, setEmails] = useState(emailsData);
+  const [showMailBox, setShowMailBox] = useState(false);
 
   const onLogEmail = () => {
     console.log("Email was sent");
-    setCounter(counter + 1);
-    // counter = counter +1; 
+    setCounter((prevState) => prevState + 1);
+
+    //setCounter(counter + 1);❌
+    // counter = counter +1; ❌
+    // setCounter((prevState) => prevState + 1) ✅
   }
 
   const handleDelete = (mailId) => {
     console.log("mailId: ", mailId);
+    setEmails((prevState) => prevState.filter((email) => email.id !== mailId));
+    // setEmails(emails.filter(email => email.id !== mailId));
+    // ex.
+    //mailId = 3
+    // [{id: 1}, {id: 2}, {id: 3}]
+    // [{id: 1}, ] 1 !== 3 // true
+    // [{id: 1}, {id: 2}] 2 !== 3 // true
+    // [{id: 1}, {id: 2}] 3 !== 3 // false
     }
+
+    const handleToggleMailBox = () => {
+      setShowMailBox((prevState) => !prevState);
+    };
 
   return (
     <div>
@@ -91,8 +114,18 @@ const isPromotional = item.quantity <= 2;
       hasDiscount={true}
       description="Tacom cu pui si legume prajita si castraveti marinati"/>
     */} 
+
 <h2 style={{color: "red"}}>Emails Counter: {counter} </h2>
-<MailBox emailCounter={counter} onLogEmail={onLogEmail} onDeleteEmail={handleDelete}/>
+<button onClick={handleToggleMailBox}>
+        {showMailBox ? "Hide" : "Show"} MailBox
+</button>
+
+{showMailBox ? (<MailBox 
+emails={emails}
+emailCounter={counter} 
+onLogEmail={onLogEmail} 
+onDeleteEmail={handleDelete}/>
+) : null}
 
     </div>
   );
