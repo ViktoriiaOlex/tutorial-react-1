@@ -3,7 +3,7 @@ import ProductCard from './Components/ProductCard/ProductCard';
 import MailBox from './Components/MailBox/MailBox';
 
 import "./App.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const productData = [
   {
@@ -44,8 +44,31 @@ const emailsData = [
 function App() {
   const [counter, setCounter] = useState(0);
   // let counter = 0; 
-  const [emails, setEmails] = useState(emailsData);
+  // const [emails, setEmails] = useState(emailsData);
+
+const [emails, setEmails] = useState(() => {
+  const stringifiendEmail = localStorage.getItem('emails');
+  if (!stringifiendEmail) return emailsData;
+
+  const parsedEmails = JSON.parse(stringifiendEmail);
+  return parsedEmails;
+});
+
+
   const [showMailBox, setShowMailBox] = useState(false);
+
+   useEffect (() => {
+    localStorage.setItem("emails", JSON.stringify(emails));
+    
+  }, [emails]);
+
+  // useEffect (() => {
+  //   console.log(`Current emails - `, emails);
+  // }, [emails])
+
+  // useEffect (() => {
+  //   console.log(`Current counter - `, counter);
+  // }, [counter])
 
   const onLogEmail = () => {
     console.log("Email was sent");
@@ -118,10 +141,12 @@ const isPromotional = item.quantity <= 2;
 <h2 style={{color: "red"}}>Emails Counter: {counter} </h2>
 <button onClick={handleToggleMailBox}>
         {showMailBox ? "Hide" : "Show"} MailBox
-</button>
+      </button>
 
-{showMailBox ? (<MailBox 
+{showMailBox ? (
+<MailBox 
 emails={emails}
+onClose={handleToggleMailBox}
 emailCounter={counter} 
 onLogEmail={onLogEmail} 
 onDeleteEmail={handleDelete}/>

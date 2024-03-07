@@ -1,5 +1,38 @@
-const MailBox = ({emails, onLogEmail, onDeleteEmail, emailCounter}) => {
+import { useEffect } from "react"
 
+const MailBox = ({emails, onClose, onLogEmail, onDeleteEmail, emailCounter}) => {
+
+//     useEffect (() => {
+// const onMouseMove = ()=> {
+//     console.log("Moving");
+// }
+
+//         window.addEventListener("mousemove", onMouseMove);
+
+//         console.log("Mailbox has been MOUNTED");
+
+//         return () => {
+//             window.removeEventListener("mousemove", onMouseMove);
+//             console.log("Mailbox has been Unmounted");
+//         }
+//     }, [])
+
+// Якщо хочу , щоб закривалося з клавіші, то Escape
+
+useEffect(() => {
+    const onKeyDown = (event) => {
+    console.log(`You clicked on button ${event.code}`);
+      if (event.code === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onClose]);
     // const handleClick = (event) => {
     //     console.log(event);
     // }
